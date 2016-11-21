@@ -5,7 +5,7 @@ log("Hello!");
 
 window.onload = init;
 
-var submitButton, inputTextArea;
+var submitButton, inputTextArea, markedOutput;
 var rawLines, splitLines;
 
 function init() {
@@ -14,6 +14,9 @@ function init() {
   submitButton.onclick = submit;
 
   inputTextArea = document.getElementById('inputText');
+  markedOutput = document.getElementById('markedOutput');
+
+  submitButton.click();
 
 
 }
@@ -24,7 +27,25 @@ function submit() {
   getRawLines();
   var leftIndent = getLeftIndent();
   getSplitLines();
+  output();
 
+}
+
+function output() {
+  for (var i = 0; i < splitLines.length; i++) {
+    var line = splitLines[i];
+    var domLine = document.createElement('div');
+    domLine.className = 'outputLine';
+
+    for (var j = 0; j < line.length; j++) {
+      var domLineFragement = document.createElement('div');
+      domLineFragement.textContent = line[j];
+      domLineFragement.className = 'outputLineFragment';
+      domLine.appendChild(domLineFragement);
+    }
+
+    markedOutput.appendChild(domLine);
+  }
 }
 
 function getSplitLines() {

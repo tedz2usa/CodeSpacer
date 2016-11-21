@@ -12,3 +12,20 @@ textarea#inputText {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+#markedOutput {
+  font-family: monospace;
+
+}
+
+.outputLine {
+
+}
+
+.outputLineFragment {
+  display: inline-block;
+  border: 2px solid #e95;
+  padding: 2px 8px;
+  margin: 4px 4px;
+
+}
