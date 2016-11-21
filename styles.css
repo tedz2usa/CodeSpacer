@@ -1,0 +1,14 @@
+
+body {
+  /*background-color: red;*/
+}
+
+textarea#inputText {
+  width: 500px;
+  height: 400px;
+}
+
+#options {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
