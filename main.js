@@ -6,7 +6,7 @@ log("Hello!");
 window.onload = init;
 
 var submitButton, inputTextArea;
-var rawLines;
+var rawLines, splitLines;
 
 function init() {
 
@@ -23,8 +23,16 @@ function submit() {
 
   getRawLines();
   var leftIndent = getLeftIndent();
+  getSplitLines();
 
+}
 
+function getSplitLines() {
+  splitLines = [];
+  for (var i = 0; i < rawLines.length; i++) {
+    splitLines[i] = rawLines[i].trim().split(" ");
+    log(splitLines[i]);
+  }
 }
 
 function getRawLines() {
