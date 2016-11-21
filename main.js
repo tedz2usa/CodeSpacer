@@ -7,6 +7,7 @@ window.onload = init;
 
 var submitButton, inputTextArea, markedOutput;
 var rawLines, splitLines;
+var alignChars;
 
 function init() {
 
@@ -27,8 +28,16 @@ function submit() {
   getRawLines();
   var leftIndent = getLeftIndent();
   getSplitLines();
+  getAlignChars();
+
   output();
 
+}
+
+function getAlignChars() {
+  var alignCharsInput = document.getElementById('alignCharsInput');
+  alignChars = alignCharsInput.value.split('');
+  log(alignChars);
 }
 
 function output() {
