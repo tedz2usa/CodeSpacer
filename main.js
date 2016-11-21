@@ -22,20 +22,28 @@ function submit() {
   log("Button Clicked!");
 
   getRawLines();
-  getLeftIndent();
+  var leftIndent = getLeftIndent();
 
 
 }
 
 function getRawLines() {
   rawLines = inputTextArea.value.split("\n");
-  log(rawLines);
 }
 
 function getLeftIndent() {
 
+  // implies code will not work if indentation is too large.
+  var minIndent = "CODE INDENTATION TOO LARGE aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
   for (var i = 0; i < rawLines.length; i++) {
-    log(rawLines[i]);
+    var rawLine = rawLines[i];
+    var j;
+    for (j = 0; j < rawLine.length && (rawLine[j] === ' ' || rawLine[j] === '\t' ); j++);
+    // log(j);
+    if (j < minIndent.length) {
+      minIndent = rawLine.substring(0, j);
+    }
   }
+  return minIndent;
 
 }
