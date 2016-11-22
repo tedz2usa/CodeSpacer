@@ -45,8 +45,30 @@ function performAlignment() {
 }
 
 function expandCells() {
+  log("Expanding cells.");
+  for (var i = 0; i < maxLengths.length; i++) {
+    var maxLength = maxLengths[i];
+    var alignment = "left";
+    if (i == 0) {
+      alignment = "right";
+    }
 
-  
+    // Now apply maxLength for all cells in column i.
+    for (var j = 0; j < splitLines.length; j++ ) {
+      var cell = splitLines[j][i];
+      var diff = maxLength - cell.length;
+      var extraSpace = multiplyString(" ", diff);
+      if (alignment == "left") {
+        if (i != maxLengths.length - 1) { // Do not add extra space at end if on the last column.
+          splitLines[j][i] = splitLines[j][i] + extraSpace;
+        }
+      } else {
+        splitLines[j][i] = extraSpace + splitLines[j][i];
+      }
+      log(splitLines[j][i]);
+    }
+
+  }
 
 
 }
