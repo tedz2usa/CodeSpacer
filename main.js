@@ -40,13 +40,40 @@ function performAlignment() {
 
   findSliderAnchorPairs();
   findMaxLengths();
-
+  expandSliders();
 
 
 
   // Do left indent last.
 }
 
+function expandSliders() {
+
+  for (var i = 0; i < sliderAnchorPairs.length; i++) {
+    var pair = sliderAnchorPairs[i];
+    var maxLength = maxLengths[i];
+
+    for (var j = 0; j < splitLines.length; j++) {
+      var splitLine = splitLines[j];
+      var length = lengthOfFragments(splitLine, pair[0], pair[1]);
+      var diff = maxLength - length;
+      var extraSpace = multiplyString(" ", diff);
+      splitLine[pair[0]] = extraSpace + splitLine[pair[0]];
+      log(splitLine);
+    }
+
+  }
+  log(splitLines);
+
+}
+
+function multiplyString(str, amount) {
+  var result = "";
+  for (var i = 1; i <= amount; i++) {
+    result += str;
+  }
+  return result;
+}
 
 function findMaxLengths() {
 
@@ -91,7 +118,7 @@ function findSliderAnchorPairs() {
   var pair = [0, 0];
   for (var i = 0; i < sampleSplitLine.length; i++) {
     if (i == 0) {
-      continue; /// By default, we know the zeroth index is a slider, continue to next index for search.
+      // continue; /// By default, we know the zeroth index is a slider, continue to next index for search.
     }
     if (alignChars.indexOf(sampleSplitLine[i].charAt(0)) >= 0) {
       // Found alignment char! Complete the slider/anchor pair.

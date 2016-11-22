@@ -15,7 +15,7 @@ textarea#inputText {
 
 #markedOutput {
   font-family: monospace;
-
+  white-space: pre;
 }
 
 .outputLine {
