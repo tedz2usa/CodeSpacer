@@ -8,7 +8,7 @@ window.onload = init;
 var submitButton, inputTextArea, markedOutput;
 var rawLines, splitLines;
 var alignChars;
-var sliderAnchorPairs;
+var sliderAnchorPairs, maxLengths;
 
 function init() {
 
@@ -39,6 +39,18 @@ function submit() {
 function performAlignment() {
 
   findSliderAnchorPairs();
+  findMaxLengths();
+
+
+
+
+  // Do left indent last.
+}
+
+
+function findMaxLengths() {
+
+  maxLengths = [];
 
   for (var i = 0; i < sliderAnchorPairs.length; i++) {
 
@@ -47,21 +59,27 @@ function performAlignment() {
     // Find max length of sum of fragments between slider and anchor pairs (inclusive).
     var maxLength = 0;
     for (var j = 0; j < splitLines.length; j++) {
-      var splitLine = splitLines[i];
+      var splitLine = splitLines[j];
       var testLength = lengthOfFragments(splitLine, pair[0], pair[1]);
       if (testLength > maxLength) {
         maxLength = testLength;
       }
     }
 
-
+    log("Max length found between index " + pair[0] + ", " + pair[1] + " is " + maxLength);
+    maxLengths.push(maxLength);
   }
 
-
-  // Do left indent last.
 }
 
-// function 
+// Indices are inclusive.
+function lengthOfFragments(splitLine, startIndex, endIndex) {
+  var length = 0;
+  for (var i = startIndex; i <= endIndex; i++) {
+    length += splitLine[i].length;
+  }
+  return length;
+}
 
 
 function findSliderAnchorPairs() {
